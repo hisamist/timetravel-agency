@@ -22,7 +22,7 @@ export function Hero() {
         poster="/images/paris-1889.png"
       >
         <source
-          src="https://cdn.coverr.co/videos/coverr-flying-through-the-clouds-4892/1080p.mp4"
+          src="/videos/TimeTravel Teaser1.mp4"
           type="video/mp4"
         />
       </video>
