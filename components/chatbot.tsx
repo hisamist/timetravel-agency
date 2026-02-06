@@ -14,30 +14,23 @@ const initialMessages: Message[] = [
     id: "welcome",
     role: "bot",
     content:
-      "Welcome to TimeTravel Agency. How can I assist you in planning your journey through time?",
+      "Bienvenue chez TimeTravel Agency! 🕰️ Je suis votre conseiller en voyages temporels. Vous souhaitez explorer Paris 1889, le Crétacé fascinant, ou la Florence Renaissance? Posez-moi vos questions!",
   },
-];
-
-const botResponses = [
-  "Our Paris 1889 package includes front-row seats to the Eiffel Tower unveiling. Shall I share more details?",
-  "The Cretaceous expedition features armored temporal observation pods for your safety. It's our most popular adventure.",
-  "Renaissance Florence is breathtaking this time of year - or rather, that time of year. I can arrange a private audience with the Medici.",
-  "Our temporal vessels are equipped with the latest chrono-stabilization technology. You'll barely feel the transition.",
-  "I'd recommend our Premium Chrononaute package - it includes era-appropriate attire and a personal historian guide.",
 ];
 
 export function Chatbot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  function handleSend() {
-    if (!input.trim()) return;
+  async function handleSend() {
+    if (!input.trim() || loading) return;
 
     const userMsg: Message = {
       id: Date.now().toString(),
@@ -47,15 +40,41 @@ export function Chatbot() {
 
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
+    setLoading(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: input.trim() }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get response");
+      }
+
+      const data = await response.json();
+
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "bot",
-        content: botResponses[Math.floor(Math.random() * botResponses.length)],
+        content: data.content || "I couldn't process that request.",
       };
+
       setMessages((prev) => [...prev, botMsg]);
-    }, 1000);
+    } catch (error) {
+      console.error("Chat error:", error);
+      const errorMsg: Message = {
+        id: (Date.now() + 1).toString(),
+        role: "bot",
+        content: "Sorry, I encountered an error. Please try again.",
+      };
+      setMessages((prev) => [...prev, errorMsg]);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -148,12 +167,14 @@ export function Chatbot() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about our journeys..."
-                className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+                disabled={loading}
+                placeholder="Posez-moi vos questions sur les voyages temporels..."
+                className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none disabled:opacity-50"
               />
               <button
                 type="submit"
-                className="flex h-8 w-8 items-center justify-center text-gold transition-colors hover:text-gold-light"
+                disabled={loading || !input.trim()}
+                className="flex h-8 w-8 items-center justify-center text-gold transition-colors hover:text-gold-light disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Send message"
               >
                 <Send size={16} />
