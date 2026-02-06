@@ -19,7 +19,7 @@ export function Hero() {
         muted
         playsInline
         className="absolute inset-0 h-full w-full object-cover"
-        poster="/images/paris-1889.jpg"
+        poster="/images/paris-1889.png"
       >
         <source
           src="https://cdn.coverr.co/videos/coverr-flying-through-the-clouds-4892/1080p.mp4"

@@ -10,7 +10,7 @@ const destinations = [
     subtitle: "Belle Epoque",
     description:
       "Witness the grand unveiling of the Eiffel Tower during the World Fair. Stroll gaslit boulevards, attend lavish salons, and experience the golden age of Parisian culture.",
-    image: "/images/paris-1889.jpg",
+    image: "/images/paris-1889.png",
     date: "April 15, 1889",
     location: "Paris, France",
     price: "From 12,500",
@@ -20,7 +20,7 @@ const destinations = [
     subtitle: "Age of Dinosaurs",
     description:
       "Journey to the final days of the Cretaceous period. Observe magnificent dinosaurs in their natural habitat from the safety of our temporal observation pods.",
-    image: "/images/cretaceous.jpg",
+    image: "/images/cretaceous.png",
     date: "65 Million Years Ago",
     location: "Prehistoric Earth",
     price: "From 24,000",
@@ -30,7 +30,7 @@ const destinations = [
     subtitle: "Renaissance",
     description:
       "Walk through the streets of Renaissance Florence alongside Da Vinci and Michelangelo. Witness the creation of David and the flourishing of art and science.",
-    image: "/images/florence-1504.jpg",
+    image: "/images/florence-1504.png",
     date: "March 8, 1504",
     location: "Florence, Italy",
     price: "From 15,800",
