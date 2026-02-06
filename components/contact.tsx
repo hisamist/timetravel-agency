@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 export function Contact() {
@@ -209,6 +209,20 @@ export function Contact() {
               )}
             </form>
           </div>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <p className="mb-6 text-sm text-muted-foreground">
+            Ready to book your temporal journey?
+          </p>
+          <a
+            href="/booking"
+            className="inline-flex items-center gap-2 border border-gold bg-transparent px-8 py-3 text-xs uppercase tracking-widest text-gold transition-all hover:bg-gold hover:text-background"
+          >
+            Book Now
+            <ArrowRight size={14} />
+          </a>
         </div>
       </div>
     </section>

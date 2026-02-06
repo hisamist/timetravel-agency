@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -12,6 +13,16 @@ const navLinks = [
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  const getNavLink = (href: string) => {
+    // If on booking page, link should go to home with anchor
+    if (pathname === "/booking") {
+      return `/${href}`;
+    }
+    // Otherwise just use the anchor
+    return href;
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/60 backdrop-blur-xl">
@@ -49,7 +60,7 @@ export function Header() {
           {navLinks.map((link) => (
             <li key={link.label}>
               <a
-                href={link.href}
+                href={getNavLink(link.href)}
                 className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-gold"
               >
                 {link.label}
@@ -59,7 +70,7 @@ export function Header() {
         </ul>
 
         <a
-          href="#destinations"
+          href="/booking"
           className="hidden rounded-none border border-gold bg-transparent px-6 py-2 text-xs uppercase tracking-widest text-gold transition-colors hover:bg-gold hover:text-background md:inline-block"
         >
           Book Now
@@ -81,7 +92,7 @@ export function Header() {
             {navLinks.map((link) => (
               <li key={link.label}>
                 <a
-                  href={link.href}
+                  href={getNavLink(link.href)}
                   onClick={() => setMobileOpen(false)}
                   className="block py-3 text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-gold"
                 >
@@ -91,7 +102,7 @@ export function Header() {
             ))}
             <li>
               <a
-                href="#destinations"
+                href="/booking"
                 onClick={() => setMobileOpen(false)}
                 className="mt-2 inline-block border border-gold bg-transparent px-6 py-2 text-xs uppercase tracking-widest text-gold transition-colors hover:bg-gold hover:text-background"
               >

@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export function Intro() {
   return (
@@ -22,11 +22,18 @@ export function Intro() {
                 chaque destination est une opportunité de vivre l'histoire comme jamais
                 auparavant.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed mb-6">
                 Avec nos guides experts et notre technologie temporelle de pointe,
                 nous garantissons des expériences immersives, sûres et transformatrices.
                 <span className="text-gold"> Le temps est votre destination.</span>
               </p>
+              <a
+                href="/booking"
+                className="inline-flex items-center gap-2 border border-gold bg-transparent px-6 py-2 text-xs uppercase tracking-widest text-gold transition-all hover:bg-gold hover:text-background"
+              >
+                Book Now
+                <ArrowRight size={14} />
+              </a>
             </div>
           </div>
         </div>

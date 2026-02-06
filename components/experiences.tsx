@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Star } from "lucide-react";
+import { Check, Star, ArrowRight } from "lucide-react";
 
 const experiences = [
   {
@@ -134,16 +134,16 @@ export function Experiences() {
                 </ul>
 
                 {/* CTA Button */}
-                <button
-                  type="button"
-                  className={`mt-8 w-full py-3 text-xs uppercase tracking-widest transition-all ${
+                <a
+                  href="/booking"
+                  className={`mt-8 block w-full py-3 text-center text-xs uppercase tracking-widest transition-all ${
                     experience.popular
                       ? "border border-gold bg-gold text-background hover:bg-gold/90"
                       : "border border-gold bg-transparent text-gold hover:bg-gold hover:text-background"
                   }`}
                 >
                   Book Now
-                </button>
+                </a>
               </div>
             </div>
           ))}
@@ -151,11 +151,18 @@ export function Experiences() {
 
         {/* Additional info */}
         <div className="mt-16 rounded-lg border border-border bg-card/50 p-8 text-center backdrop-blur-sm">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground mb-6">
             All packages include temporal insurance, professional guides, and our
             <span className="text-gold"> 100% Timeline Safety Guarantee</span>.
             Custom experiences available upon request.
           </p>
+          <a
+            href="/booking"
+            className="inline-flex items-center gap-2 border border-gold bg-transparent px-8 py-3 text-xs uppercase tracking-widest text-gold transition-all hover:bg-gold hover:text-background"
+          >
+            Book Your Experience
+            <ArrowRight size={14} />
+          </a>
         </div>
       </div>
     </section>
